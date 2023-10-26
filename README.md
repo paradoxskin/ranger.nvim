@@ -1,3 +1,6 @@
+> Just change some plugin code from origin [repo](https://github.com/kelly-lin/ranger.nvim) for personal use.
+>
+> Thanks, kelly-lin!
 # ranger.nvim
 
 [Ranger](https://github.com/ranger/ranger) integration plugin for neovim with
@@ -18,15 +21,9 @@ configuration for example.
 
 ```lua
 {
-  "kelly-lin/ranger.nvim",
+  "paradoxskin/ranger.nvim",
   config = function()
     require("ranger-nvim").setup({ replace_netrw = true })
-    vim.api.nvim_set_keymap("n", "<leader>ef", "", {
-      noremap = true,
-      callback = function()
-        require("ranger-nvim").open(true)
-      end,
-    })
   end,
 }
 ```
@@ -40,7 +37,8 @@ do not invoke `ranger_nvim.setup()` `ranger.nvim` will use the default values.
 | Key | Type | Default | Description |
 | --- | ---- | ------- | ----------- |
 | `enable_cmds` | `boolean` | `false` | Set vim commands, see [commands](#commands). |
-| `keybinds` | `Keybind = table<string, OPEN_MODE>` | See [ranger keybindings](#ranger-keybindings). | Key bindings set in `ranger` to control how files are opened in neovim. See [ranger keybindings](#ranger-keybindings). |
+| `keybinds` | `Keybind = table<string, string>` | See [ranger keybindings](#ranger-keybindings). | Key bindings set in `ranger` to control how files are opened in neovim. See [ranger keybindings](#ranger-keybindings). |
+| `start_bind` | `string` | `nil` | The key to open ranger |
 | `replace_netrw` | `boolean` | `false` | Replace `netrw` with `ranger` when neovim is launched with a directory argument. |
 | `ui` | `UI` | See [UI Configuration](#configuration---ui). | Settings for ranger window. |
 
@@ -48,16 +46,17 @@ See below code snippet for example configuring `ranger.nvim` with the default
 values.
 
 ```lua
-local ranger_nvim = require("ranger-nvim")
-ranger_nvim.setup({
+require("ranger-nvim").setup({
   enable_cmds = false,
   replace_netrw = false,
   keybinds = {
-    ["ov"] = ranger_nvim.OPEN_MODE.vsplit,
-    ["oh"] = ranger_nvim.OPEN_MODE.split,
-    ["ot"] = ranger_nvim.OPEN_MODE.tabedit,
-    ["or"] = ranger_nvim.OPEN_MODE.rifle,
+    ["ov"] = "vsplit",
+	["oh"] = "split",
+	["ot"] = "tabedit",
+	["or"] = "rifle",
+
   },
+  start_bind = nil,
   ui = {
     border = "none",
     height = 1,
@@ -137,6 +136,8 @@ ranger_nvim.setup({
   },
 })
 ```
+
+> Though OPEN_MODE just a table of string
 
 ## Commands
 

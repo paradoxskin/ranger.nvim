@@ -11,7 +11,7 @@ M.OPEN_MODE = {
 	rifle = "rifle",
 }
 
----@alias Keybinds table<string, OPEN_MODE>
+---@alias Keybinds table<string, string>
 
 ---Configurable user options.
 ---@class Options
@@ -32,12 +32,12 @@ local opts = {
 	enable_cmds = false,
 	replace_netrw = false,
 	keybinds = {
-		["ov"] = M.OPEN_MODE.vsplit,
-		["oh"] = M.OPEN_MODE.split,
-		["ot"] = M.OPEN_MODE.tabedit,
-		["or"] = M.OPEN_MODE.rifle,
+		["ov"] = "vsplit",
+		["oh"] = "split",
+		["ot"] = "tabedit",
+		["or"] = "rifle",
 	},
-      start_bind = "",
+      start_bind = nil,
 	ui = {
 		border = "none",
 		height = 1,
