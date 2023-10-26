@@ -37,6 +37,7 @@ local opts = {
 		["ot"] = M.OPEN_MODE.tabedit,
 		["or"] = M.OPEN_MODE.rifle,
 	},
+      start_bind = "",
 	ui = {
 		border = "none",
 		height = 1,
@@ -238,6 +239,9 @@ function M.setup(user_opts)
 	if opts.enable_cmds then
 		vim.cmd('command! Ranger lua require("ranger-nvim").open(true)')
 	end
+      if opts.start_bind then
+            vim.keymap.set("n", opts.start_bind, "", { noremap = true, callback = function() require("ranger-nvim").open(true) end, })
+      end
 end
 
 return M
